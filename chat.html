@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/chat-style.css">
+    <title>Ved Chat</title>
+
+    <style>
+        #toggle-button {
+            /* padding: 10px; */
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            outline: none;
+        }
+
+        #toggle-button .circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid crimson;
+            background-color: #1adb4b;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        #toggle-button.active .circle {
+            background-color: red;
+            animation: pulse 0.5s infinite alternate;
+            border: 2px solid #1adb4b;
+            border-radius: 25%;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.1);
+            }
+        }
+    </style>
+
+    <script>
+        // service worker to show the notification in the smartphones
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then((registration) => {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch((error) => {
+                    console.error('Service Worker registration failed:', error);
+                });
+        }
+    </script>
+</head>
+
+<body>
+    <div class="title">
+        <h1><i class="fa-regular fa-heart fa-" style="color: #ffffff;"></i>&nbsp;&nbsp;<span
+                style="color: crimson;">Ved</span>App</i>&nbsp;&nbsp;
+            <i class="fa-solid fa-ellipsis fa-fade"></i>
+        </h1>
+    </div>
+
+    <div id="chat-container">
+        <div id="chat-data">
+            <div id="chat-name">
+                <span style="font-size: 24px; border-right: 3px solid red;">👩‍❤️‍👨&nbsp;</span>&nbsp;&nbsp;
+                <p><b style="font-size: large;" id="pro-name">User..</b></p>
+            </div>
+
+            <div id="chat-icons">
+                <button id="toggle-button">
+                    <div class="circle" title="speech to message"></div> <!-- Icon represented by a circle -->
+                </button>
+                <!-- <input type="checkbox" id="checkbox" title="change the background"> -->
+                <label for="video-input" id="video-input-label" class="file-label" title=" Send Video">
+                    <i class="fa-brands fa-youtube" style="color: #0bb971;"></i>
+                </label>
+                <input type="file" id="video-input" style="display: none;">
+
+                <label for="image-input" class="file-input-label" title="send image">
+                    <span><i class="fa-solid fa-camera" style="color: #1d53aa;" id="img-status"></i></span>
+                    <input type="file" id="image-input" accept="image/*" onchange="handleFileInputChange(this)" />
+                </label>
+
+                <i style="color: crimson; font-size: 25px; width: 25px; margin-top: 4px;"
+                    class="fa-solid fa-right-from-bracket" id="logout-button" title="logout"></i>
+            </div>
+        </div>
+
+        <div id="chat-inner-container">
+            <div id="messages"></div>
+            <input type="text" id="message-input" placeholder="Type your message...">
+            <button id="send-button" style="text-align: center;"><b><i class="fa-solid fa-paper-plane"></i></b></button>
+        </div>
+    </div>
+
+    <!-- opening and closing the Images  -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modalImage" class="modal-content">
+    </div>
+
+    <!-- Loading animation overlay -->
+    <div class="overlay active" id="loadingOverlay">
+        <div class="alert-box active" id="alb">
+            <i class="fa-solid fa-spinner fa-spin" style="color: #ffffff;"></i>
+        </div>
+    </div>
+
+    <!-- important firebase links -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script type="module" src="config.js"></script>
+    <script type="module" src="app.js"></script>
+
+    <script>
+        // Showing the image in the full view
+        const openModal = (imageUrl) => {
+            const modal = document.getElementById("imageModal");
+            const modalImage = document.getElementById("modalImage");
+
+            modal.style.display = "block";
+            void modal.offsetWidth;
+
+            modal.style.opacity = 1;
+            modalImage.src = imageUrl;
+
+            document.body.classList.add('blur');
+        };
+
+        // Closing - Showing the image in the full view
+        const closeModal = () => {
+            const modal = document.getElementById("imageModal");
+            const modalImage = document.getElementById("modalImage");
+
+            modal.style.opacity = 0;
+            document.body.classList.remove('blur');
+
+            setTimeout(() => {
+                modal.style.display = "none";
+            }, 300);
+        };
+
+        function handleFileInputChange(input) {
+            var toast = document.getElementById('img-status');
+            var st = document.getElementById('status');
+
+            var statusCheck = localStorage.getItem('status');
+            if (status === true) {
+                st.style.color = 'green'
+            }
+
+            // Checking if an image is selected
+            if (input.files.length > 0) {
+                toast.style.color = 'green';
+            }
+        }
+    </script>
+
+    <script>
+        // Changing the background based on the selection
+        // var checkbox = document.getElementById('checkbox');
+        // var messagesDiv = document.getElementById('messages');
+        // checkbox.addEventListener('change', function () {
+        //     if (checkbox.checked) {
+        //         messagesDiv.style.backgroundImage = 'url("ved.jpg")';
+        //     } else {
+        //         messagesDiv.style.backgroundImage = 'none';
+        //     }
+        // });
+
+        // changing the view of loading animation
+        setTimeout(function () {
+            document.getElementById('loadingOverlay').style.display = 'none'
+            document.getElementById('alb').style.display = 'none'
+        }, 5000);
+    </script>
+
+    <!-- speech to text file  -->
+    <script>
+        const messageInput = document.getElementById('message-input');
+        const toggleButton = document.getElementById('toggle-button');
+        let isListening = false;
+        let recognition;
+
+        const startListening = () => {
+            recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+
+            recognition.onstart = () => {
+                isListening = true;
+                toggleButton.classList.add('active');
+            };
+
+            recognition.onend = () => {
+                isListening = false;
+                toggleButton.classList.remove('active');
+            };
+
+            recognition.onresult = (event) => {
+                let finalTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        finalTranscript += event.results[i][0].transcript + ' ';
+                    }
+                }
+                messageInput.value += finalTranscript;
+            };
+
+            recognition.start();
+        };
+
+        const stopListening = () => {
+            recognition.stop();
+        };
+
+        toggleButton.addEventListener('click', () => {
+            if (isListening) {
+                stopListening();
+            } else {
+                startListening();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

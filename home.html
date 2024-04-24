@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-9392883289550796">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9392883289550796"
+        crossorigin="anonymous"></script>
+    <title>Welcome to Ved Chat</title>
+    <link rel="stylesheet" href="/login-style.css">
+
+    <!-- Add Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/index-style.css">
+
+    <style>
+        #logOut {
+            color: crimson;
+            text-align: right;
+        }
+
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #56cf52;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Apply the animation to the element */
+        #subToast {
+            color: #289624;
+            opacity: 0;
+            /* Initially hide the element */
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .user-profile {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            color: white;
+            background-color: rgb(0, 0, 0);
+        }
+
+        .user-name,
+        .user-username {
+            margin: 0;
+            color: white;
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: lavender;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        .welcome-container {
+            /* position: relative; */
+            text-align: center;
+            padding: 20px;
+            /* background-color: #fff; */
+            margin-top: 0px;
+            border-radius: 10px;
+            width: 90%;
+            /* background-color: lavender; */
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+        }
+
+        @media screen and (min-width: 768px) {
+            .welcome-container {
+                margin-top: 10  0px;
+
+            }
+        }
+
+        .subscription-container {
+            margin-top: 20px;
+        }
+
+        .cta-button {
+            padding: 10px;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #searchInput {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #searchResults {
+            margin-top: 10px;
+        }
+
+        /* Additional styles as needed */
+        .additional-content {
+            margin-top: 30px;
+        }
+
+
+        .button {
+            line-height: 1;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: .75rem;
+            background-color: var(--clr);
+            color: #fff;
+            border-radius: 10rem;
+            font-weight: 600;
+            padding: .75rem 1.5rem;
+            padding-left: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: background-color .3s;
+        }
+
+        .button__icon-wrapper {
+            flex-shrink: 0;
+            width: 25px;
+            height: 25px;
+            position: relative;
+            color: var(--clr);
+            background-color: #fff;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+        }
+
+        .button:hover {
+            background-color: #000;
+        }
+
+        .button:hover .button__icon-wrapper {
+            color: #000;
+        }
+
+        .button__icon-svg--copy {
+            position: absolute;
+            transform: translate(-150%, 150%);
+        }
+
+        .button:hover .button__icon-svg:first-child {
+            transition: transform .3s ease-in-out;
+            transform: translate(150%, -150%);
+        }
+
+        .button:hover .button__icon-svg--copy {
+            transition: transform .3s ease-in-out .1s;
+            transform: translate(0);
+        }
+
+        #imgChage{
+            padding: 20px;
+         
+        }
+
+        .cta-button {
+            position: fixed;
+            bottom: 50px;
+            right: 20px;
+            z-index: 999; /* Ensure button stays above other elements */
+            /* Existing button styles... */
+        }
+
+        .cta-button a:hover {
+            color: white;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1><span style="color: crimson; font-weight: 900; font-size: 27px;">Ved</span> Chat</h1>
+        <div id="hamburger-icon"> &#9776;</div>
+        <div id="menu-items">
+            <a onmouseover="ar" onclick="userLogout()"
+                style="color: crimson; font-weight: 900; cursor: pointer;">Logout</a>
+            <a href="/terms&cond.html" style="color: rgb(20, 220, 87); font-weight: 900;">Subscription Plan </a>
+            <a href="/aboutus.html" style="color: #3fca1c; font-weight: 900;">About Us </a>
+        </div>
+    </header>
+
+
+    <div class="welcome-container">
+        <img src="chat.png" height="120px" width="120px" id="imgChage" alt="">
+        <h1 id="welcomeUsername">Welcome, 💐</h1>
+
+        <!-- Subscription Section -->
+        <div class="subscription-container">
+            <h2>Ved Chat, A Premium Chat App</h2>
+            <p>Unlock exclusive features and elevate your chat experience with Ved Chat Premium.</p>
+            <!-- <button class="cta-button" style="background-color: crimson; margin-top: 40px;"
+                onclick="subscribe()">Subscribe Now</button> -->
+            <a style="--clr: #7808d0; margin-top: 50px;" class="button" href="/chat.html" >
+                <span class="button__icon-wrapper">
+                    <svg width="10" class="button__icon-svg" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 15">
+                        <path fill="currentColor"
+                            d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z">
+                        </path>
+                    </svg>
+
+                    <svg class="button__icon-svg  button__icon-svg--copy" xmlns="http://www.w3.org/2000/svg" width="10"
+                        fill="none" viewBox="0 0 14 15">
+                        <path fill="currentColor"
+                            d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z">
+                        </path>
+                    </svg>
+                </span>
+                Lets Chat
+            </a>
+        </div>
+        <br>
+        <h2 id="subToast"></h2>
+        <br>
+
+        <!-- Searching for Users -->
+        <!-- <input type="text" id="searchInput" placeholder="Search for a user">
+        <div id="searchResults"></div>
+        <script type="module" src="search.js"></script> -->
+    </div>
+
+    <!-- <a style="--clr: #7808d0;" class="button cta-button" href="/chat.html">
+        <span class="button__icon-wrapper">
+            <i class="fas fa-comment"></i>
+        </span>
+        Lets Chat
+    </a> -->
+
+    <footer>
+        <img src="logo-white-edited.png" alt="Ved Software Inc.">
+    </footer>
+
+    <script>
+
+        function userLogout() {
+            var name = localStorage.getItem('name');
+            var popup = document.createElement('div');
+            popup.className = 'popup';
+            popup.innerHTML = `<b>${name}, logged out successfully</b>`;
+            document.body.appendChild(popup);
+
+            // Set the timeout to 2000 milliseconds (2 seconds)
+            setTimeout(function () {
+                popup.remove();
+            }, 3000);
+
+            localStorage.removeItem('name');
+            window.location.href = 'login.html';
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var header = document.querySelector("header");
+            var spanElement = document.querySelector("header h1 span")
+
+            window.addEventListener("scroll", function () {
+                var scrollPosition = window.scrollY;
+
+
+            });
+        });
+
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const menuItems = document.getElementById('menu-items');
+
+        hamburgerIcon.addEventListener('click', (event) => {
+            event.stopPropagation();
+            menuItems.style.display = menuItems.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.addEventListener('click', (event) => {
+            const isClickInsideMenu = menuItems.contains(event.target);
+            const isClickOnHamburger = event.target === hamburgerIcon;
+
+            if (!isClickInsideMenu && !isClickOnHamburger) {
+                menuItems.style.display = 'none';
+            }
+        });
+
+        menuItems.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
+
+        function subscribe() {
+            const ele = document.getElementById('subToast');
+            ele.innerHTML = 'This feature is coming soon. Thank you for your interest.';
+            ele.style.opacity = 1; // Make the element visible
+
+            setTimeout(function () {
+                ele.style.opacity = 0; // Hide the element after 3 seconds
+                ele.innerHTML = ''; // Reset the content
+            }, 3000);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const username = urlParams.get('username');
+            const welcomeUsernameElement = document.getElementById('welcomeUsername');
+            const existingText = welcomeUsernameElement.textContent;
+            welcomeUsernameElement.textContent = existingText + " " + localStorage.getItem('name') + "..!"
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<div id="signup-overlay">
+        <button id="close-overlay-btn" onclick="closeSignUpPrompt()">X</button>
+        <div id="overlay-content">
+            <h2 style="background-color: #51aeda; padding: 15px; border-radius: 10px; border: 1px solid #001129 ;"><span
+                    style="color: crimson; font-weight: 800; font-size: 27px;">Ved</span> <b>Software</b></h2>
+            <p><b>Welcome to Ved Chat - The Secure Chat App</b></p>
+            <div id="marketing-dialogues">
+                <p>Take a Subscriptions, and Enjoy Secure chatting.</p>
+            </div>
+            <form id="signup-form" onsubmit="submitForm(); return false;">
+                <center>
+                    <h2 style="color: whitesmoke; background-color: #001129; padding: 5px; border-radius: 10px;">
+                        <b>Submit Details</b></h2>
+                </center>
+
+                <input style="width: 100%;" type="text" id="nameOfPerson" name="nameOfPerson"
+                    placeholder="Enter your name" required>
+                <input type="email" id="email-input" placeholder="Enter your email address" required>
+                <select id="plan-select" required style="width: 100%; box-sizing: border-box;">
+                    <option draggable="true">Select Plan</option>
+                    <option value="monthly">Monthly Plan ( 99 Rs.)</option>
+                    <option value="yearly">Yearly Plan ( 799 Rs.)</option>
+                </select>
+
+                <button id="submit-btn" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    id="btnLogin"
+
+    id="forgotPasswordLink"

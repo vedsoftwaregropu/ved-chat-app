@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career at Ved Chat</title>
+
+    <!-- Add your own Firebase configuration here -->
+    <!-- Include Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.2.0/firebase-database.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: lavender;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #001129;
+            padding: 15px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.0);
+            z-index: 1000;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 0px solid crimson;
+        }
+
+        header h1 {
+            font-size: 25px;
+            margin: 0;
+            text-align: right;
+            color: lavender;
+        }
+
+        header a {
+            text-decoration: none;
+            color: #fff;
+            margin: 0 15px;
+            font-weight: 600;
+        }
+
+        header #menu-items {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: #001129;
+            text-align: center;
+            padding: 15px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        header #menu-items a {
+            margin: 10px 0;
+        }
+
+        header #hamburger-icon {
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #001129;
+            padding: 15px;
+            text-align: center;
+            color: #fff;
+            box-shadow: 12px 0px 10px rgba(0, 0, 0, 0.0);
+        }
+
+        footer img {
+            height: 30px;
+            width: 100px;
+        }
+
+        .container {
+            margin: 100px auto;
+            padding: 20px;
+            background: lavender;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            border-radius: 8px;
+            margin-bottom: 50px;
+            align-items: center;
+            justify-content: center;
+            /* display: inline-flex; */
+        }
+
+        .job-position {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 2px solid rgb(0, 158, 197);
+            border-radius: 10px;
+        }
+
+        .apply-btn {
+            background-color: crimson;
+            color: lavender;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <center><h1><span style="color: crimson; text-align: center; font-weight: 800; font-size: 27px;">Ved</span> Chat | Careers</h1>
+        </center>
+    </header>
+    
+    <div class="container">
+        <br>
+        <h1 style="font-size: 24px;">Apply for the below open positions</h1>
+        <br>
+        <div class="job-position">
+            <h2>Frontend Intern</h2>
+            <p>Skills: HTML, CSS, JavaScript, GitHub, Git</p>
+            <!-- Input for attaching resume -->
+            <input type="file" accept=".pdf,.doc,.docx" id="resumeFrontend" style="display: none;">
+            <button class="apply-btn" onclick="apply('Frontend Intern', 'resumeFrontend')">Attach Resume</button>
+            <!-- Submit button (initially hidden) -->
+            <button class="apply-btn" id="submitFrontend" style="display: none;"
+                onclick="submit('Frontend Intern')">Submit</button>
+        </div>
+
+        <div class="job-position">
+            <h2>Backend Developer Intern</h2>
+            <p>Skills: SQL, Java, GitHub, Git</p>
+            <!-- Input for attaching resume -->
+            <input type="file" accept=".pdf,.doc,.docx" id="resumeBackend" style="display: none;">
+            <button class="apply-btn" onclick="apply('Backend Developer Intern', 'resumeBackend')">Attach
+                Resume</button>
+            <!-- Submit button (initially hidden) -->
+            <button class="apply-btn" id="submitBackend" style="display: none;"
+                onclick="submit('Backend Developer Intern')">Submit</button>
+        </div>
+
+        <div class="job-position">
+            <h2>Marketing person</h2>
+            <p>Skills: Communication, Business Understandings</p>
+            <!-- Input for attaching resume -->
+            <input type="file" accept=".pdf,.doc,.docx" id="resumeFrontend" style="display: none;">
+            <button class="apply-btn" onclick="apply('Frontend Intern', 'resumeFrontend')">Attach Resume</button>
+            <!-- Submit button (initially hidden) -->
+            <button class="apply-btn" id="submitFrontend" style="display: none;"
+                onclick="submit('Frontend Intern')">Submit</button>
+        </div>
+
+        <div class="job-position">
+            <h2>Accountant</h2>
+            <p>Skills: Finance Activity, Payroll etc.</p>
+            <!-- Input for attaching resume -->
+            <input type="file" accept=".pdf,.doc,.docx" id="resumeFrontend" style="display: none;">
+            <button class="apply-btn" onclick="apply('Frontend Intern', 'resumeFrontend')">Attach Resume</button>
+            <!-- Submit button (initially hidden) -->
+            <button class="apply-btn" id="submitFrontend" style="display: none;"
+                onclick="submit('Frontend Intern')">Submit</button>
+        </div>
+    </div>
+    <footer>
+        <img src="logo-white-edited.png" alt="Ved Software Logo">
+    </footer>
+
+
+    <script>
+        const fileInputs = document.querySelectorAll('input[type="file"]');
+
+        fileInputs.forEach((input) => {
+            input.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                const position = event.target.id.replace('resume', '');
+                console.log(`Selected file for ${position}: ${file.name}`);
+
+                // Show the submit button for the specific job position
+                const submitButton = document.getElementById(`submit${position}`);
+                submitButton.style.display = 'block';
+            });
+        });
+
+        function apply(position, inputId) {
+            const inputElement = document.getElementById(inputId);
+            inputElement.click(); // Trigger the file input click event
+        }
+
+        function submit(position) {
+            // Add your logic to handle the submission of the resume to Firebase or any other action
+            console.log(`Submitting resume for ${position}`);
+            // Reset file input and hide submit button (optional)
+            const inputElement = document.getElementById(`resume${position}`);
+            const submitButton = document.getElementById(`submit${position}`);
+            inputElement.value = "";  // Error occurs here
+            submitButton.style.display = 'none';
+        }
+
+    </script>
+
+</body>
+
+</html>

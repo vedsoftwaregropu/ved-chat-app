@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ved</title>
+    <script src="script.js"></script>
+
+    <link rel="stylesheet" href="/login-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <h1><span style="color: crimson; font-weight: 800; font-size: 27px;">Ved</span> Chat</h1>
+        <div id="hamburger-icon">&#9776;</div>
+        <div id="menu-items">
+            <a href="/index.html" style="color: #3fca1c; font-weight: 900;">Home </a>
+            <a href="/signup.html" style="color: #3fca1c; font-weight: 900;">Sign Up </a>
+            <a href="/careers.html" style="color: rgb(20, 220, 37); font-weight: 900;">Careers </a>
+            <a href="/terms&cond.html" style="color: rgb(20, 220, 87); font-weight: 900;">Terms & Cond </a>
+            <a href="/aboutus.html" style="color: #3fca1c; font-weight: 900;">About Us </a>
+            <!-- <a href="" style="color: crimson; font-weight: 900;">Subscription →</a> -->
+        </div>
+    </header>
+
+    <div id="login-container">
+        <h2>Login</h2>
+        <hr id="hrtag">
+        <input placeholder="Enter Email" id="txtEmail" name="email" required autocomplete="amm">
+        <input type="password" placeholder="Enter Password" id="txtPassword" name="password" required>
+        <br>
+        <br>
+        <div style="text-align: center; display: block;">
+            <h5 style="display: inline-block; margin: 0 10px;"><span><a href="reset-password.html">
+                        <p style="color:crimson">Forgot password?</p>
+                    </a></span></h5>
+            <h5 style="display: inline-block; margin: 0 0px; color: lavender;">|</h5>
+            <h5 style="display: inline-block; margin: 0 10px;"><a href="signup.html">SignUp</a></h5>
+        </div>
+        <br>
+        <div class="btns">
+            <button id="btnLogin" title="login to Enjoy chatting">Login</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <!-- <button onclick="signUpPrompt()">Signup</button> -->
+        </div>
+        <br>
+    </div>
+
+    <div id="signup-overlay">
+        <button id="close-overlay-btn" onclick="closeSignUpPrompt()">X</button>
+        <div id="overlay-content">
+            <h2 style="background-color: #51aeda; padding: 15px; border-radius: 10px; border: 1px solid #001129 ;"><span
+                    style="color: crimson; font-weight: 800; font-size: 27px;">Ved</span> <b>Software</b></h2>
+            <p><b>Welcome to Ved Chat - The Secure Chat App</b></p>
+            <div id="marketing-dialogues">
+                <p>Take a Subscriptions, and Enjoy Secure chatting.</p>
+            </div>
+            <form id="signup-form" onsubmit="submitForm(); return false;">
+                <center>
+                    <h2 style="color: whitesmoke; background-color: #001129; padding: 5px; border-radius: 10px;">
+                        <b>Submit Details</b>
+                    </h2>
+                </center>
+
+                <input style="width: 100%;" type="text" id="nameOfPerson" name="nameOfPerson"
+                    placeholder="Enter your name" required>
+                <input type="email" id="email-input" placeholder="Enter your email address" required>
+                <select id="plan-select" required style="width: 100%; box-sizing: border-box;">
+                    <option draggable="true">Select Plan</option>
+                    <option value="monthly">Monthly Plan ( 99 Rs.)</option>
+                    <option value="yearly">Yearly Plan ( 799 Rs.)</option>
+                </select>
+
+                <button id="submit-btn" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function signUpPrompt() {
+            // const overlay = document.getElementById('signup-overlay');
+            // overlay.style.display = 'block';
+            // const lgn = document.getElementById('login-container')
+            // lgn.style.display = 'none';
+            window.location.href = 'signup.html';
+        }
+
+        function closeSignUpPrompt() {
+            const overlay = document.getElementById('signup-overlay');
+            overlay.style.display = 'none';
+            const lgn = document.getElementById('login-container')
+            lgn.style.display = 'block';
+        }
+
+        function submitForm() {
+            const emailInput = document.getElementById('email-input');
+            const planSelect = document.getElementById('plan-select');
+            const nameOfCst = document.getElementById('nameOfPerson');
+
+            const email = emailInput.value;
+            const plan = planSelect.value;
+            const nameValue = nameOfCst.value;
+
+            // Save data to Firebase
+            firebase.database().ref('userSubmissions').push({
+                name: nameValue,
+                email: email,
+                plan: plan
+            });
+            alert("Thank you for your submission! We will get back to you soon.");
+            closeSignUpPrompt();
+        }
+
+    </script>
+
+    <footer
+        style="position: fixed; bottom: 0; width: 100%;background:#001129; padding: 15px; text-align: center; color: #fff;box-shadow: 12px 0px 10px rgba(0, 0, 0, 0.0);">
+        <img src="logo-white-edited.png" alt="Ved Software Logo" style="height: 30px; width: 100px;">
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-auth.js"></script>
+
+    <script>
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const menuItems = document.getElementById('menu-items');
+
+        hamburgerIcon.addEventListener('click', (event) => {
+            event.stopPropagation();
+            menuItems.style.display = menuItems.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.addEventListener('click', (event) => {
+            const isClickInsideMenu = menuItems.contains(event.target);
+            const isClickOnHamburger = event.target === hamburgerIcon;
+
+            if (!isClickInsideMenu && !isClickOnHamburger) {
+                menuItems.style.display = 'none';
+            }
+        });
+
+        menuItems.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
+
+    </script>
+
+</body>
+
+</html>

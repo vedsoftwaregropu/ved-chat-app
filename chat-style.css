@@ -1,0 +1,685 @@
+/*default styles */
+body,
+h1,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1f3c53;
+    margin: 0;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(230, 230, 250, 0.856);
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: crimson;
+    border-radius: 10px;
+}
+
+
+:root {
+    --background-color: #1f3c53;
+    --text-color: #ffffff;
+    --box-shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Title */
+.title {
+    border: 1px inset white;
+    text-align: center;
+    background-color: #001129;
+    color: var(--text-color);
+    padding: 10px 0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    border-radius: 4px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 80%;
+    max-height: 80%;
+    filter: blur(0);
+    transition: filter 1s ease-in-out;
+    border: 3px rgb(255, 255, 255) inset;
+    border-radius: 5px;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 40px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.blur {
+    filter: blur(0px);
+    transition: filter 0.3s ease-in-out;
+}
+
+#toast {
+    display: none;
+    background-color: aqua;
+    color: black;
+    text-align: center;
+    padding: 16px;
+    border-radius: 8px;
+    position: fixed;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    animation: alternate-reverse;
+    transition: ease-out 2s;
+}
+
+.overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0.7;
+    transition: opacity 1s ease-in-out;
+}
+
+.overlay.active {
+    opacity: 1;
+}
+
+.alert-box {
+    font-weight: 900;
+    font-size: 55px;
+    color: lavender;
+    padding: 15px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.alert-box.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#mode-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 20px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+body.dark-mode {
+    --background-color: #ffffff;
+    --text-color: #1e1e1e;
+    --box-shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+.title h1 {
+    font-size: 35px;
+    color: lavender;
+}
+
+/* Chat container */
+#chat-container {
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #001129;
+    border: 1px solid #d8dadb;
+    border-radius: 5px;
+    margin-top: 0px;
+    overflow: hidden;
+    color: white;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Chat data */
+#chat-data {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #bdc3c7;
+}
+
+/* Chat name */
+#chat-name {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+#chat-name i {
+    margin-right: 10px;
+    font-size: 24px;
+    color: #2980b9;
+}
+
+/* Chat icons */
+#chat-icons {
+    display: flex;
+    gap: 10px;
+    font-size: 20px;
+}
+
+#chat-icons i {
+    color: #3498db;
+    cursor: pointer;
+}
+
+/* Chat inner container */
+#chat-inner-container {
+    padding: 10px;
+}
+
+/* Messages */
+#messages {
+    height: 350px;
+    overflow-y: auto;
+    padding: 10px;
+    border-bottom: 1px solid #a0a6ac;
+    color: white;
+    font-weight: 500;
+
+}
+
+/* Message input */
+#message-input {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.2s;
+    font-weight: bold;
+    border-left: 10px solid rgb(0, 153, 255);
+    border-right: 10px solid crimson;
+}
+
+#message-input:focus::placeholder {
+    transition: 1s linear;
+    color: red;
+}
+
+#message-input:focus::placeholder {
+    border-color: #3498db;
+}
+
+/* Send button */
+#send-button {
+    width: 6%;
+    padding: 10px;
+    background-color: rgb(0, 132, 172);
+    color: #ecf0f1;
+    font-size: 15px;
+    border: 1px white solid;
+    border-radius: 5px;
+    text-align: right;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+
+#send-button:hover {
+    background-color: #02c90c;
+}
+
+
+/* Responsive design for Mobiles */
+@media screen and (max-width: 430px) {
+    body {
+        background-color: black !important;
+    }
+
+    .title {
+        border: 1px solid white;
+        border-bottom: none;
+        border-top: 2px solid white;
+        color: white;
+        padding: 15px 0;
+    }
+
+    .title h1 {
+        font-size: 22px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-style: normal;
+        font-weight: 900;
+    }
+
+    #messages {
+        height: 65vh;
+        background-image: none;
+        background-size: cover;
+        position: relative;
+        overflow: scroll;
+    }
+
+    #chat-container {
+        max-width: 100%;
+        border-radius: 5px;
+    }
+
+    #message-input {
+        font-size: 14px;
+        width: 74%;
+        border-radius: 10px;
+    }
+
+    #send-button {
+        width: 10%;
+        padding: 10px;
+        background-color: rgb(17, 144, 148);
+        color: #ecf0f1;
+        font-size: 16px;
+        border-radius: 20px;
+        text-align: justify;
+        margin-top: 10px;
+        cursor: pointer;
+        border: 1px #2196F3 inset;
+        transition: background-color 0.2s;
+    }
+
+    .sent {
+        background-color: #d10000;
+        color: white;
+    }
+
+    .received {
+        background-color: #44b3d073;
+        color: white;
+    }
+
+}
+
+#messages div {
+    margin-bottom: 10px;
+    padding: 7px;
+    border-radius: 5px;
+}
+
+.sent {
+    float: right;
+    clear: both;
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #334154;
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    display: inline-block;
+    max-width: 75%;
+    /* padding-top: 15px; */
+}
+
+
+.received {
+    float: left;
+    clear: both;
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: rgb(73, 73, 114);
+    border-radius: 50%;
+    display: inline-block;
+    color: lavender;
+    max-width: 75%;
+}
+
+.message-time {
+    font-size: 10px;
+    font-style: italic;
+    font-weight: bolder;
+    color: lavender;
+}
+
+.message-image {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 5px;
+    border: 1px solid lavender;
+}
+
+
+/* Image input btn */
+.file-input-label {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    border-radius: 5px;
+    height: 35px;
+    width: 50px;
+    text-align: center;
+    font-size: 30px;
+
+}
+
+.file-input-label span {
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: -10px;
+}
+
+#image-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 90%;
+    height: 90%;
+    opacity: 0;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+#checkbox {
+    display: inline-block;
+    width: 18px;
+    border-radius: 5px;
+    background-color: red;
+}
+
+#status {
+    color: white;
+    font-size: 20px;
+}
+
+.file-label {
+    cursor: pointer;
+    padding: 0px;
+    color: #ffffff;
+    width: 10%;
+    align-items: center;
+    font-size: 30px;
+    padding-right: 5px;
+}
+
+#video-input {
+    display: none;
+}
+
+.pro-icon {
+    /* height: 30px;
+    width: 30px;
+    background-color: black;
+    color: lavender;
+    font-size: xx-small;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-align: left;
+    border: 2px inset whitesmoke; */
+    /* font-style: oblique; */
+    border-bottom: 2px solid red;
+    /* background-color: #02c90c; */
+    padding: 1px;
+    margin: 5px 0px;
+}
+
+
+
+.pl {
+    width: 2em;
+    height: 2em;
+}
+
+.pl__ring {
+    animation: ringA 2s linear infinite;
+}
+
+.pl__ring--a {
+    stroke: #f42f25;
+}
+
+.pl__ring--b {
+    animation-name: ringB;
+    stroke: #f49725;
+}
+
+.pl__ring--c {
+    animation-name: ringC;
+    stroke: #255ff4;
+}
+
+.pl__ring--d {
+    animation-name: ringD;
+    stroke: #f42582;
+}
+
+/* Animations */
+@keyframes ringA {
+
+    from,
+    4% {
+        stroke-dasharray: 0 660;
+        stroke-width: 20;
+        stroke-dashoffset: -330;
+    }
+
+    12% {
+        stroke-dasharray: 60 600;
+        stroke-width: 30;
+        stroke-dashoffset: -335;
+    }
+
+    32% {
+        stroke-dasharray: 60 600;
+        stroke-width: 30;
+        stroke-dashoffset: -595;
+    }
+
+    40%,
+    54% {
+        stroke-dasharray: 0 660;
+        stroke-width: 20;
+        stroke-dashoffset: -660;
+    }
+
+    62% {
+        stroke-dasharray: 60 600;
+        stroke-width: 30;
+        stroke-dashoffset: -665;
+    }
+
+    82% {
+        stroke-dasharray: 60 600;
+        stroke-width: 30;
+        stroke-dashoffset: -925;
+    }
+
+    90%,
+    to {
+        stroke-dasharray: 0 660;
+        stroke-width: 20;
+        stroke-dashoffset: -990;
+    }
+}
+
+@keyframes ringB {
+
+    from,
+    12% {
+        stroke-dasharray: 0 220;
+        stroke-width: 20;
+        stroke-dashoffset: -110;
+    }
+
+    20% {
+        stroke-dasharray: 20 200;
+        stroke-width: 30;
+        stroke-dashoffset: -115;
+    }
+
+    40% {
+        stroke-dasharray: 20 200;
+        stroke-width: 30;
+        stroke-dashoffset: -195;
+    }
+
+    48%,
+    62% {
+        stroke-dasharray: 0 220;
+        stroke-width: 20;
+        stroke-dashoffset: -220;
+    }
+
+    70% {
+        stroke-dasharray: 20 200;
+        stroke-width: 30;
+        stroke-dashoffset: -225;
+    }
+
+    90% {
+        stroke-dasharray: 20 200;
+        stroke-width: 30;
+        stroke-dashoffset: -305;
+    }
+
+    98%,
+    to {
+        stroke-dasharray: 0 220;
+        stroke-width: 20;
+        stroke-dashoffset: -330;
+    }
+}
+
+@keyframes ringC {
+    from {
+        stroke-dasharray: 0 440;
+        stroke-width: 20;
+        stroke-dashoffset: 0;
+    }
+
+    8% {
+        stroke-dasharray: 40 400;
+        stroke-width: 30;
+        stroke-dashoffset: -5;
+    }
+
+    28% {
+        stroke-dasharray: 40 400;
+        stroke-width: 30;
+        stroke-dashoffset: -175;
+    }
+
+    36%,
+    58% {
+        stroke-dasharray: 0 440;
+        stroke-width: 20;
+        stroke-dashoffset: -220;
+    }
+
+    66% {
+        stroke-dasharray: 40 400;
+        stroke-width: 30;
+        stroke-dashoffset: -225;
+    }
+
+    86% {
+        stroke-dasharray: 40 400;
+        stroke-width: 30;
+        stroke-dashoffset: -395;
+    }
+
+    94%,
+    to {
+        stroke-dasharray: 0 440;
+        stroke-width: 20;
+        stroke-dashoffset: -440;
+    }
+}
+
+@keyframes ringD {
+
+    from,
+    8% {
+        stroke-dasharray: 0 440;
+        stroke-width: 20;
+        stroke-dashoffset: 0;
+    }
+
+    16% {
+        stroke-dasharray: 40 400;
+        stroke-width: 30;
+        stroke-dashoffset: -5;
+    }
+
+    36% {
+        stroke-dasharray: 40 400;
+        stroke-width: 30;
+        stroke-dashoffset: -175;
+    }
+
+    44%,
+    50% {
+        stroke-dasharray: 0 440;
+        stroke-width: 20;
+        stroke-dashoffset: -220;
+    }
+
+    58% {
+        stroke-dasharray: 40 400;
+        stroke-width: 30;
+        stroke-dashoffset: -225;
+    }
+
+    78% {
+        stroke-dasharray: 40 400;
+        stroke-width: 30;
+        stroke-dashoffset: -395;
+    }
+
+    86%,
+    to {
+        stroke-dasharray: 0 440;
+        stroke-width: 20;
+        stroke-dashoffset: -440;
+    }
+}

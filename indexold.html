@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ved Soft - Welcome</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/index-style.css">
+</head>
+<body>
+    <div id="intro-container">
+        <h1 class="animate__animated animate__fadeIn animate__delay-0s">
+            <span style="color: red; font-weight: 900;">Ved</span>
+            <span style="color: white;">Soft</span>
+        </h1>
+        <p class="animate__animated animate__fadeIn animate__delay-1s" style="color: lavender;">
+            Building Dreams, Hand in Hand
+        </p>
+        <div class="animation-container animate__animated animate__fadeIn animate__delay-2s">
+            <button id="btn" onclick="clickBtn()">
+                <i class="fa-solid fa-arrow-right-long"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 5000);
+
+        function clickBtn() {
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>

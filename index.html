@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-9392883289550796">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9392883289550796"
+        crossorigin="anonymous"></script>
+    <title>Welcome to Ved Chat</title>
+    <link rel="icon" href="/image.png" type="image/x-icon">
+    <link rel="shortcut icon" href="image.png" style="border-radius: 50%;" type="image/x-icon">
+
+    <!-- Add Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/index-style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1><span style="color: crimson; font-weight: 900; font-size: 27px;">Ved</span> Chat</h1>
+        <div id="hamburger-icon">&#9776;</div>
+        <div id="menu-items">
+            <a href="/index.html" style="color: #3fca1c; font-weight: 900;">Home </a>
+            <a href="/login.html" style="color: #3fca1c; font-weight: 900;">Login </a>
+            <a href="/signup.html" style="color: #3fca1c; font-weight: 900;">Sign Up </a>
+            <a href="/careers.html" style="color: rgb(20, 220, 37); font-weight: 900;">Careers </a>
+            <a href="/terms&cond.html" style="color: rgb(20, 220, 87); font-weight: 900;">Terms & Cond </a>
+            <a href="/aboutus.html" style="color: #3fca1c; font-weight: 900;">About Us </a>
+            <!-- <a href="" style="color: crimson; font-weight: 900;">Subscription →</a> -->
+        </div>
+    </header>
+    <!-- Welcome Screen Section -->
+    <div class="welcome-container">
+        <h1>Welcome to <span style="color: crimson; font-weight: 900;">Ved</span> Chat</h1>
+        <p>Connect with friends, family, and colleagues in a secure and delightful chat experience. Ved Chat offers
+            end-to-end encryption, ensuring your conversations stay private and end-to-end encrypted.</p>
+    </div>
+
+    <div class="cta-buttons">
+        <a href="/login.html" class="cta-button"><i class="icon fas fa-sign-in-alt"></i>Let's Go</a>
+    </div>
+    <!-- Features Section -->
+    <div class="feature-container">
+        <h1>Explore our features:</h1>
+        <ul class="feature-list">
+            <li><i class="icon fas fa-comment"></i>Real-time messaging</li>
+            <li><i class="icon fas fa-lock"></i> Secure and private conversations</li>
+            <li><i class="icon fas fa-smile"></i> User-friendly interface</li>
+            <li><i class="icon fas fa-cogs"></i> Customizable chat settings</li>
+        </ul>
+
+        <p>Join Ved Chat today and experience a new era of communication. Connect, chat, and stay connected!</p>
+    </div>
+
+    <!-- Important Links Section -->
+    <div class="links-container">
+        <h1>Other important links:</h1>
+        <a href="/terms&cond.html">Terms & Conditions</a>
+        <a href="/careers.html">Join Our Team</a>
+        <br><br><br><br><br>
+    </div>
+
+    <footer>
+        <img src="logo-white-edited.png" alt="Ved Software Inc.">
+    </footer>
+
+    <!-- Your existing scripts go here -->
+
+</body>
+<script>
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const menuItems = document.getElementById('menu-items');
+
+    hamburgerIcon.addEventListener('click', (event) => {
+        event.stopPropagation();
+        menuItems.style.display = menuItems.style.display === 'block' ? 'none' : 'block';
+    });
+
+    document.addEventListener('click', (event) => {
+        const isClickInsideMenu = menuItems.contains(event.target);
+        const isClickOnHamburger = event.target === hamburgerIcon;
+
+        if (!isClickInsideMenu && !isClickOnHamburger) {
+            menuItems.style.display = 'none';
+        }
+    });
+
+    menuItems.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+
+</script>
+
+</html>
